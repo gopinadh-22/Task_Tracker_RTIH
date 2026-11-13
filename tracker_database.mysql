@@ -57,6 +57,11 @@ VALUES ('Sai Gopi', 'saigopi@example.com', 'hashed_password_123', 'admin');
 INSERT INTO task_table (user_id, title, description, status)
 VALUES (1, 'Set up MySQL schema', 'Create users and tasks tables in task_tracker_db', 'In_Progress');
 
-select * from users_table;
+USE task_tracker_db;
 
-select * from task_table;
+INSERT INTO users_table (name, email, password_hash, role) VALUES
+('Alice', 'alice@example.com', '$2y$12$tAe2SgmzMumoonTpp4hFRO8UjcrrsU2f05eQaOY30goEMO3eA/ZZi', 'user'),
+('Bob',   'bob@example.com',   '$2y$12$tAe2SgmzMumoonTpp4hFRO8UjcrrsU2f05eQaOY30goEMO3eA/ZZi', 'user');
+
+
+select * from users_table;
