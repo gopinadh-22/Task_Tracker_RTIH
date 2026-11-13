@@ -1,0 +1,50 @@
+-- users for the Level 3 login and tasks for the main feature
+-- Two tables required: users, tasks
+-- users data will be stored for login credentials
+-- tasks are stored w.r.to users.
+
+
+-- Column	Type	Rules
+-- id	unsigned integer	primary key, auto increment
+-- name	VARCHAR(100)	required
+-- email	VARCHAR(255)	required, must be unique
+-- password_hash	VARCHAR(255)	required
+-- role	ENUM of user and admin	required, default user
+-- created_at	TIMESTAMP	required, default is the current time
+
+
+create database if not exists task_tracker_db;
+use task_tracker_db;
+
+-- user's table
+create table if not exists users_table (
+    id int unsigned primary key auto_increment,
+    name VARCHAR(100) not null,
+    email VARCHAR(255) not null unique,
+    password_hash VARCHAR(255) not null,
+    role ENUM('user','admin') not null default 'user',
+    created_at TIMESTAMP not null default current_timestamp
+); 
+
+
+-- Column	Type	Rules
+-- id	unsigned integer	primary key, auto increment
+-- user_id	unsigned integer	required, foreign key to users.id
+-- title	VARCHAR(150)	required
+-- description	TEXT	optional (allows NULL)
+-- status	ENUM of Pending, In Progress, Completed	required, default Pending
+-- created_at	TIMESTAMP	required, default is the current time
+
+create table if not exists task_table (
+    id int unsigned primary key auto_increment,
+    user_id int unsigned not null,
+    title varchar(150) not null,
+    description text,
+    status enum('Pending','In Progress','Completed') not null default 'Pending',
+    created_at TIMESTAMP not null default current_timestamp,
+    key idx_tasks_user (user_id),
+    constraint fk_task_users foreign key (user_id) references users_table (id) on delete cascade 
+);
+
+-- level-1 : add, list, edit, delete -- crud operations
+
