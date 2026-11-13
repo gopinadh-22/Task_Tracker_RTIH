@@ -3,4 +3,4 @@ __pycache__/
 .pytest_cache/
 config/db.php
 .vscode/
-password_hash.txt/
+.password_hash.php
