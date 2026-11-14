@@ -5,4 +5,5 @@ __pycache__/
 config/db.php
 .vscode/
 password_hash.txt
+logs/
 

@@ -1,12 +1,13 @@
 <?php
 require __DIR__ . '/../includes/helpers.php';
+require_login();
 require __DIR__ . '/../includes/db.php';
 
 // Only accept form submissions (POST)
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    exit('Method not allowed.');
+    abort(405, 'Method not allowed.');
 }
+csrf_check();
 
 $id     = filter_var($_POST['id'] ?? null, FILTER_VALIDATE_INT);
 $status = $_POST['status'] ?? '';

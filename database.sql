@@ -77,3 +77,8 @@ INSERT INTO task_table (user_id, title, description, status) VALUES
 
 -- alter table task_table auto_increment = 1; 
 
+SELECT id, user_id, status FROM task_table;
+
+
+UPDATE users_table SET role = 'admin' WHERE email = 'gopinath.napa@gmail.com';
+SELECT id, name, email, role FROM users_table;

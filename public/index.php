@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../includes/helpers.php';
+require_login();
 require __DIR__ . '/../includes/db.php';
 
 $pageTitle = 'My Tasks';
@@ -111,6 +112,7 @@ require __DIR__ . '/../includes/header.php';
                     <form method="post" action="task_delete.php" class="d-inline"
                         onsubmit="return confirm('Delete this task? This cannot be undone.');">
                         <input type="hidden" name="id" value="<?= (int) $task['id'] ?>">
+                        <?= csrf_field() ?>
                         <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                     </form>
                     </td>

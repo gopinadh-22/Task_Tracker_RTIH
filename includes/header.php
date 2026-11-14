@@ -12,8 +12,31 @@ $pageTitle = $pageTitle ?? 'Task Tracker';
 </head>
 <body class="bg-light">
 <nav class="navbar navbar-dark bg-dark mb-4">
-    <div class="container">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
         <a class="navbar-brand" href="index.php">Task Tracker_header</a>
+
+        <div class="d-flex align-items-center gap-2">
+        <?php if (is_logged_in()): ?>
+            <?php if (is_admin()): ?>
+                <a href="admin_tasks.php" class="btn btn-sm btn-outline-warning">All Tasks</a>
+            <?php endif; ?>
+            <?php $navName = $_SESSION['user_name'] ?? ''; ?>
+            <span class="rounded-circle bg-primary text-white fw-bold d-inline-flex justify-content-center align-items-center"
+                  style="width: 34px; height: 34px;" title="<?= e($navName) ?>">
+                <?= e(mb_strtoupper(mb_substr($navName, 0, 1))) ?>
+            </span>
+            <span class="text-white"><?= e($navName) ?></span>
+            <span class="badge text-bg-secondary"><?= is_admin() ? 'admin' : 'user' ?></span>
+
+            <form method="post" action="logout.php" class="m-0">
+                <?= csrf_field() ?>
+                <button type="submit" class="btn btn-sm btn-outline-light">Logout</button>
+            </form>
+        <?php else: ?>
+            <a href="login.php" class="btn btn-sm btn-outline-light">Login</a>
+            <a href="register.php" class="btn btn-sm btn-light">Register</a>
+        <?php endif; ?>
+        </div>
     </div>
 </nav>
 <main class="container">

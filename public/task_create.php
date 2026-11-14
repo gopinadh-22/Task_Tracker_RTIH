@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../includes/helpers.php';
+require_login();
 require __DIR__ . '/../includes/db.php';
 
 $pageTitle   = 'Add Task';
@@ -9,6 +10,7 @@ $description = '';
 $status = 'Pending';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    csrf_check();
     $title       = trim($_POST['title'] ?? '');
     $description = trim($_POST['description'] ?? '');
     $status = $_POST['status'] ?? '';
@@ -50,6 +52,7 @@ require __DIR__ . '/../includes/header.php';
 <h1 class="h3 mb-3">Add Task</h1>
 
 <form method="post" class="card card-body">
+    <?= csrf_field() ?>
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input type="text" id="title" name="title"
