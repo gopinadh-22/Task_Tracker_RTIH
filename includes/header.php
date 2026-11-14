@@ -9,19 +9,20 @@ $pageTitle = $pageTitle ?? 'Task Tracker';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-<nav class="navbar navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-dark bg-primary mb-4">
     <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
-        <a class="navbar-brand" href="index.php">Task Tracker_header</a>
+        <a class="navbar-brand" href="index.php">Task Tracker</a>
 
         <div class="d-flex align-items-center gap-2">
         <?php if (is_logged_in()): ?>
             <?php if (is_admin()): ?>
-                <a href="admin_tasks.php" class="btn btn-sm btn-outline-warning">All Tasks</a>
+                <a href="admin_tasks.php" class="btn btn-sm btn-warning">All Tasks</a>
             <?php endif; ?>
             <?php $navName = $_SESSION['user_name'] ?? ''; ?>
-            <span class="rounded-circle bg-primary text-white fw-bold d-inline-flex justify-content-center align-items-center"
+            <span class="rounded-circle bg-white text-primary fw-bold d-inline-flex justify-content-center align-items-center"
                   style="width: 34px; height: 34px;" title="<?= e($navName) ?>">
                 <?= e(mb_strtoupper(mb_substr($navName, 0, 1))) ?>
             </span>

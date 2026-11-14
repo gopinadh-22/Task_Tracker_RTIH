@@ -8,8 +8,7 @@ $pageTitle = 'Edit Task';
 // 1. Read and check the id from the URL
 $id = filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT);
 if ($id === false || $id < 1) {
-    http_response_code(404);
-    exit('Task not found.');
+    abort(404, 'Task not found.');
 }
 
 // 2. Load the task, but only if it belongs to the current user
@@ -114,5 +113,3 @@ require __DIR__ . '/../includes/header.php';
         <a href="index.php" class="btn btn-secondary">Cancel</a>
     </div>
 </form>
-
-<?php require __DIR__ . '/../includes/footer.php'; ?>

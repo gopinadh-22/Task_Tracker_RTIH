@@ -168,6 +168,5 @@ function abort(int $code, string $message): void
     require __DIR__ . '/header.php';
     echo '<div class="alert alert-danger">' . e($message) . '</div>';
     echo '<a href="index.php" class="btn btn-secondary">Back to tasks</a>';
-    require __DIR__ . '/footer.php';
     exit;
 }

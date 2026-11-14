@@ -93,5 +93,3 @@ require __DIR__ . '/../includes/header.php';
         <a href="index.php" class="btn btn-secondary">Cancel</a>
     </div>
 </form>
-
-<?php require __DIR__ . '/../includes/footer.php'; ?>
