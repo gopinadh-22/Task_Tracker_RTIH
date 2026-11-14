@@ -65,3 +65,19 @@ INSERT INTO users_table (name, email, password_hash, role) VALUES
 
 
 select * from users_table;
+
+select * from task_table;
+
+-- 1. Insert a user first (if users_table is currently empty)
+USE task_tracker_db;
+
+INSERT INTO task_table (user_id, title, description, status) VALUES
+(1, 'Prepare project report', 'Write the weekly progress report.', 'Pending'),
+(1, 'Fix login bug', 'Session not regenerating after login.', 'In_Progress'),
+(2, 'Buy study material', 'PHP and MySQL reference book.', 'Pending');
+
+-- UPDATE task_table SET title = 'Prepare project report' WHERE id = 1;
+
+-- DELETE FROM task_table;
+
+-- alter table task_table auto_increment = 1; 

@@ -13,7 +13,7 @@ $pageTitle = $pageTitle ?? 'Task Tracker';
 <body class="bg-light">
 <nav class="navbar navbar-dark bg-dark mb-4">
     <div class="container">
-        <a class="navbar-brand" href="index.php">Task Tracker</a>
+        <a class="navbar-brand" href="index.php">Task Tracker_header</a>
     </div>
 </nav>
 <main class="container">
