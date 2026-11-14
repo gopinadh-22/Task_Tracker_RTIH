@@ -40,7 +40,7 @@ create table if not exists task_table (
     user_id int unsigned not null,
     title varchar(150) not null,
     description text,
-    status enum('Pending','In_Progress','Completed') not null default 'Pending',
+    status enum('Pending','In Progress','Completed') not null default 'Pending',
     created_at TIMESTAMP not null default current_timestamp,
     key idx_tasks_user (user_id),
     constraint fk_task_users foreign key (user_id) references users_table (id) on delete cascade 
@@ -50,12 +50,7 @@ create table if not exists task_table (
 
 USE task_tracker_db;
 
--- 1. Insert a user first (if users_table is currently empty)
-INSERT INTO users_table (name, email, password_hash, role)
-VALUES ('Sai Gopi', 'saigopi@example.com', 'hashed_password_123', 'admin');
-
-INSERT INTO task_table (user_id, title, description, status)
-VALUES (1, 'Set up MySQL schema', 'Create users and tasks tables in task_tracker_db', 'In_Progress');
+-- 1. Insert a user's first (if users_table is currently empty)
 
 USE task_tracker_db;
 
@@ -81,3 +76,4 @@ INSERT INTO task_table (user_id, title, description, status) VALUES
 -- DELETE FROM task_table;
 
 -- alter table task_table auto_increment = 1; 
+

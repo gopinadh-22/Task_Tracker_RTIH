@@ -1,0 +1,94 @@
+<?php
+require __DIR__ . '/../includes/helpers.php';
+require __DIR__ . '/../includes/db.php';
+
+$pageTitle   = 'Add Task';
+$errors      = [];
+$title       = '';
+$description = '';
+$status = 'Pending';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title       = trim($_POST['title'] ?? '');
+    $description = trim($_POST['description'] ?? '');
+    $status = $_POST['status'] ?? '';
+
+
+    if ($title === '') {
+        $errors['title'] = 'Title is required.';
+    } elseif (mb_strlen($title) > 150) {
+        $errors['title'] = 'Title must be 150 characters or fewer.';
+    }
+
+    if (mb_strlen($description) > 1000) {
+        $errors['description'] = 'Description must be 1000 characters or fewer.';
+    }
+
+    if (!in_array($status, TASK_STATUSES, true)) {
+    $errors['status'] = 'Please choose a valid status.';
+    }
+
+    if (!$errors) {
+        $stmt = db()->prepare(
+            'INSERT INTO task_table (user_id, title, description, status) VALUES (?, ?, ?, ?)'
+        );
+        $stmt->execute([
+            current_user_id(),
+            $title,
+            $description === '' ? null : $description,
+            $status,
+        ]);
+
+        flash_set('success', 'Task added successfully.');
+        redirect('index.php');
+    }
+}
+
+require __DIR__ . '/../includes/header.php';
+?>
+
+<h1 class="h3 mb-3">Add Task</h1>
+
+<form method="post" class="card card-body">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" id="title" name="title"
+               class="form-control <?= isset($errors['title']) ? 'is-invalid' : '' ?>"
+               value="<?= e($title) ?>" maxlength="150" required>
+        <?php if (isset($errors['title'])): ?>
+            <div class="invalid-feedback"><?= e($errors['title']) ?></div>
+        <?php endif; ?>
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" name="description" rows="4"
+                  class="form-control <?= isset($errors['description']) ? 'is-invalid' : '' ?>"
+                  maxlength="1000"><?= e($description) ?></textarea>
+        <?php if (isset($errors['description'])): ?>
+            <div class="invalid-feedback"><?= e($errors['description']) ?></div>
+        <?php endif; ?>
+    </div>
+
+    <div class="mb-3">
+    <label for="status" class="form-label">Status</label>
+    <select id="status" name="status"
+            class="form-select <?= isset($errors['status']) ? 'is-invalid' : '' ?>">
+        <?php foreach (TASK_STATUSES as $option): ?>
+            <option value="<?= e($option) ?>" <?= $status === $option ? 'selected' : '' ?>>
+                <?= e($option) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <?php if (isset($errors['status'])): ?>
+        <div class="invalid-feedback"><?= e($errors['status']) ?></div>
+    <?php endif; ?>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary">Save Task</button>
+        <a href="index.php" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+<?php require __DIR__ . '/../includes/footer.php'; ?>
