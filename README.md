@@ -1,4 +1,4 @@
-### Task_Tracker
+# Task_Tracker
 
 ## Section 1:
 A simple multi-user Task Tracker built for the RTIH Intern – IT technical assignment. Users register, log in, and manage their own tasks (add, edit, delete, change status, search and filter). An admin role can view and remove any task.
@@ -26,7 +26,7 @@ Git, if you clone the repository
 
 Enabling the PHP extensions (Windows): if php --ini shows no loaded configuration file, copy php.ini-development to php.ini in the PHP folder. In php.ini, set extension_dir to the full path of the ext folder, and remove the ; in front of extension=pdo_mysql and extension=mbstring. Open a new terminal and run php -m to confirm both appear in the list.
 
-# Section 3: Setup
+## Section 3: Setup
 Step 1: Clone or unzip the project, then open a terminal in the project folder.
 Step 2: Import the database:
 mysql -u root -p -e "source database.sql"
